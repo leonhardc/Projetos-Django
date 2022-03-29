@@ -6,7 +6,7 @@ from .models import Contato
 
 def index(request):
     # adicionando paginação no projeto
-    contatos = Contato.objects.all()
+    contatos = Contato.objects.order_by('nome')
     paginator = Paginator(contatos, 10)
 
     page = request.GET.get('p')
@@ -19,6 +19,12 @@ def index(request):
 def ver_contato(request, contato_id):
     try:
         contato = Contato.objects.get(id=contato_id)
+
+        if not contato.mostrar:
+            # se o campo 'mostrar' não estiver marcado, levantar
+            # um erro "Page not found" (404)
+            raise Http404()
+
         return render(request, 'contatos/ver_contato.html', {
             'contato': contato
         })
