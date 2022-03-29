@@ -1,2 +1,2 @@
 # Projetos-Django
-Iniciando meus estudos em Django,  e este é um repositório para guardar minhas primeiras experiências e minhas primeiras ideias.
+Iniciando meus estudos em Django.  Este repositório tem o intuito de guardar os meus primeiros projetos em Django e, também, minhas primeiras ideias desenvolvidas nesse framework.
