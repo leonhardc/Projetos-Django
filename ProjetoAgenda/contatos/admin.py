@@ -5,7 +5,7 @@ from .models import Categoria, Contato
 class ContatoAdmin(admin.ModelAdmin):
     # exibir na interface admin os campos abaixo
     list_display = ['id', 'nome', 'sobrenome', 'telefone', 'email',
-                    'data_de_criacao', 'categoria']
+                    'data_de_criacao', 'categoria', 'mostrar']
 
     # tornar os campos abaixo clicáveis
     list_display_links = ['id', 'nome', 'sobrenome']
@@ -18,6 +18,9 @@ class ContatoAdmin(admin.ModelAdmin):
 
     # adiciona fields de busca
     search_fields = ['nome', 'sobrenome']
+
+    # campos editáveis na janela admin
+    list_editable = ('telefone', 'mostrar')
 
 
 # registrar as classes abaixo na interface de admin
