@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings # *1
+from django.conf.urls.static import static # *2
+
+# Os módulos *1 e *2 importados acima são necessários para inserir uma imagem nos
+# formulários do nosso projeto.
 
 urlpatterns = [
     path('', include('contatos.urls')),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # diretório de imagens
