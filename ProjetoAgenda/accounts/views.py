@@ -1,11 +1,27 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.core.validators import validate_email # validar email
 from django.contrib.auth.models import User # checar a existência de um usuário na base de dados
+from django.contrib.auth.decorators import login_required
 
 
 def login(request):
-    return render(request, 'accounts/login.html')
+    if request.method != 'POST':
+        # verifica se o formulario esta vazio
+        return render(request, 'accounts/login.html')
+    # declarar variaveis
+    usuario = request.POST.get('usuario')
+    senha = request.POST.get('senha')
+    # autenticar usuario
+    user = auth.authenticate(request, username=usuario, password=senha)
+    # se o usuário não autenticar, a função auth.authenticate() irá retornar None
+    if not user:
+        messages.error(request, 'Usuário ou Senha inválidos.')
+        return render(request, 'accounts/login.html')
+    else:
+        auth.login(request, user) #faz login
+        messages.success(request, 'Voce fez login com sucesso.')
+        return redirect('dashboard')
 
 
 def logout(request):
@@ -73,6 +89,7 @@ def register(request):
     return redirect('login')
 
 
+@login_required(redirect_field_name='login')
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
 
