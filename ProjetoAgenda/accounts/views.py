@@ -25,7 +25,9 @@ def login(request):
 
 
 def logout(request):
-    return render(request, 'accounts/logout.html')
+    # faz logout do usuário
+    auth.logout(request)
+    return redirect('dashboard')
 
 
 def register(request):
