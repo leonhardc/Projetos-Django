@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 
 
 def login(request):
@@ -10,6 +11,7 @@ def logout(request):
 
 
 def register(request):
+    print('>>> ', request.POST)
     return render(request, 'accounts/register.html')
 
 
