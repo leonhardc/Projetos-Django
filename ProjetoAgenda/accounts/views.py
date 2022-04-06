@@ -3,6 +3,7 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email # validar email
 from django.contrib.auth.models import User # checar a existência de um usuário na base de dados
 from django.contrib.auth.decorators import login_required
+from .models import FormContato
 
 
 def login(request):
@@ -93,5 +94,19 @@ def register(request):
 
 @login_required(redirect_field_name='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    if request.method != 'POST':
+        form = FormContato()
+        return render(request, 'accounts/dashboard.html', {'form': form})
 
+    form = FormContato(request.POST, request.FILES)
+
+    if not form.is_valid():
+        # se os dados do formulario não forem validos
+        messages.error(request, 'Erro ao enviar formulário.')
+        form = FormContato(request.POST)
+        return render(request, 'accounts/dashboard.html', {'form': form})
+
+    # salva os dados do formulario na base de dados
+    form.save()
+    messages.success(request, 'Contato salvo com sucesso.')
+    return redirect('dashboard')
