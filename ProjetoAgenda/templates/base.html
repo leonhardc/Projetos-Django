@@ -21,6 +21,12 @@
       <div class="col-lg-12">
 
         {% if 'accounts' not in request.path %}
+          <br>
+          <p align="right">
+              <a href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button" >Cadastrar-se</a>
+              <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button" >Entrar</a>
+              <a href="{% url 'logout' %}" class="btn btn-secondary btn-lg" role="button" >Sair</a>
+          </p>
 
           <br><br>
           <form method="get" action="{% url 'busca' %}">
