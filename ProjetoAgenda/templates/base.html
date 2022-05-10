@@ -6,27 +6,27 @@
 <head>
   <title>{% block titulo %}{% endblock %}Agenda</title>
   {% include 'parciais/_head.html' %}
-
 </head>
 
 <body>
 
-  <!-- Navigation -->
-
   {% include 'parciais/_nav.html' %}
 
-  <!-- Page Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
 
         {% if 'accounts' not in request.path %}
           <br>
-          <p align="right">
-              <a href="{% url 'logout' %}" class="btn btn-secondary btn-lg" role="button" >Sair</a>
+          <p>
+            <span style="font-size:35px; padding-right:690px; font-weight: bold">Olá, Seja bem vindo!</span>
+            <a href="{% url 'logout' %}"
+               class="btn btn-secondary btn-lg"
+               role="button"
+               style="background-color:#FF8C00; border-color:#FF8C00; font-weight: bold"
+            >Sair</a>
           </p>
-          <h2 class="mt-5">Olá, {{user}} !</h2>
-          <br><br>
+
           <form method="get" action="{% url 'busca' %}">
             <div class="form-group row">
               <div class="col-12">
