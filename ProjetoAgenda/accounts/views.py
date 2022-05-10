@@ -1,16 +1,24 @@
+# imports
+
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.core.validators import validate_email # validar email
 from django.contrib.auth.models import User # checar a existência de um usuário na base de dados
 from django.contrib.auth.decorators import login_required
 from .models import FormContato
+from contatos import views
 
-
+# views
+# auth.get_user(request)
 def login(request):
+    """ Função de login:
+        Se o usuario e senha estão vazios, carrega novamente login.html
+        Se o usuario e a senha estao preenchidos ele autentica o usuário e faz login."""
+
     if request.method != 'POST':
-        # verifica se o formulario esta vazio
+        # verifica se o formulário esta vazio
         return render(request, 'accounts/login.html')
-    # declarar variaveis
+    # declarar variáveis
     usuario = request.POST.get('usuario')
     senha = request.POST.get('senha')
     # autenticar usuario
@@ -22,13 +30,13 @@ def login(request):
     else:
         auth.login(request, user) #faz login
         messages.success(request, 'Voce fez login com sucesso.')
-        return redirect('dashboard')
+        return redirect('index')
 
 
 def logout(request):
     # faz logout do usuário
     auth.logout(request)
-    return redirect('dashboard')
+    return render(request, 'accounts/Tela_inicial.html')
 
 
 def register(request):
@@ -99,7 +107,7 @@ def dashboard(request):
         return render(request, 'accounts/dashboard.html', {'form': form})
 
     form = FormContato(request.POST, request.FILES)
-
+    # form.initial = {'do_usuario': auth.get_user(request).id, }
     if not form.is_valid():
         # se os dados do formulario não forem validos
         messages.error(request, 'Erro ao enviar formulário.')
@@ -107,6 +115,8 @@ def dashboard(request):
         return render(request, 'accounts/dashboard.html', {'form': form})
 
     # salva os dados do formulario na base de dados
-    form.save()
+    form_aux = form.save(commit=False)
+    form_aux.do_usuario = auth.get_user(request).id
+    form_aux.save()
     messages.success(request, 'Contato salvo com sucesso.')
-    return redirect('dashboard')
+    return redirect('index')

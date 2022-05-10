@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib import auth
 
 
 class Categoria(models.Model):
@@ -20,6 +21,7 @@ class Contato(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     mostrar = models.BooleanField(default=True)
     foto = models.ImageField(blank=True, upload_to='picture/%Y/%m/%d')
+    do_usuario = models.IntegerField(default=None)  # campo que guarda o id do usuario que criou esse contato
 
     def __str__(self):
         # mudar exibição do objeto na interface admin

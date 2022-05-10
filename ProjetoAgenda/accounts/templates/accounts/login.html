@@ -27,7 +27,7 @@
 
 {% else %}
     <p>
-        Você fez login com {{user}},
+        Você fez login com {{user}} - id {{user.id}},
         <a href="{% url 'logout' %}">Clique aqui</a> para sair.
     </p>
 {% endif %}

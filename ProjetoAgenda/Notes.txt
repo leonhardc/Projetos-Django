@@ -1,0 +1,7 @@
+# pegar id do usuário logado no momento
+
+from django.contrib import auth
+auth.get_user(request).id
+
+SuperUser: leonardo123, senha: 123
+Usuario de teste: LEONARDO_USER01, senha: 123456

@@ -23,11 +23,9 @@
         {% if 'accounts' not in request.path %}
           <br>
           <p align="right">
-              <a href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button" >Cadastrar-se</a>
-              <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button" >Entrar</a>
               <a href="{% url 'logout' %}" class="btn btn-secondary btn-lg" role="button" >Sair</a>
           </p>
-
+          <h2 class="mt-5">Olá, {{user}} !</h2>
           <br><br>
           <form method="get" action="{% url 'busca' %}">
             <div class="form-group row">

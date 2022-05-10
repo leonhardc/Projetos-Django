@@ -4,13 +4,14 @@ from django.http import Http404
 from .models import Contato
 from django.db.models import Q, Value # Q -> modulo django para fazer consultas mais complexas
 from django.db.models.functions import Concat
-from django.contrib import messages
+from django.contrib import messages, auth
 
 
 def index(request):
     # adicionando paginação no projeto
+
     contatos = Contato.objects.order_by('nome').filter(
-        mostrar=True
+        mostrar=True, do_usuario=auth.get_user(request).id
     )
     paginator = Paginator(contatos, 10)
 
