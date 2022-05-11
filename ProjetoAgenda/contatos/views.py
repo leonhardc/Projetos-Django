@@ -5,8 +5,10 @@ from .models import Contato
 from django.db.models import Q, Value # Q -> modulo django para fazer consultas mais complexas
 from django.db.models.functions import Concat
 from django.contrib import messages, auth
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(redirect_field_name='login')
 def index(request):
     # adicionando paginação no projeto
 
@@ -22,9 +24,11 @@ def index(request):
     })
 
 
+@login_required(redirect_field_name='login')
 def ver_contato(request, contato_id):
     try:
-        contato = Contato.objects.get(id=contato_id)
+        usuario_id = auth.get_user(request).id
+        contato = Contato.objects.get(id=contato_id, do_usuario=usuario_id)
 
         if not contato.mostrar:
             # se o campo 'mostrar' não estiver marcado, levantar
@@ -37,7 +41,17 @@ def ver_contato(request, contato_id):
     except Contato.DoesNotExist as e:
         print(e)
         # O erro abaixo se refere a uma página web não encontrada.
-        return Http404()
+        raise Http404()
+
+
+@login_required(redirect_field_name='login')
+def excluir_contato(request, contato_id):
+
+    # excluir contato
+    record = Contato.objects.get(id=contato_id)
+    record.delete()
+
+    return redirect('index')
 
 # outra forma de fazer a view 'ver_contato'
 #
@@ -62,32 +76,13 @@ def busca(request):
 
 
 
-    campos = Concat('nome', Value(' '),'sobrenome') # esse trecho faz parte da SOLUÇÃO 3
-
-    # SOLUÇÃO 1
-    # O trecho de codigo abaixo verifica se o termo digitado na caixa de busca
-    # está contido no campo 'nome' de algum contato na nossa base de dados
-    #
-    # contatos = Contato.objects.order_by('nome').filter(
-    #     nome__icontains=termo,
-    #     mostrar=True
-    # )
-
-    # SOLUÇÃO 2
-    # O trecho de codigo abaixo verifica se o termo digitado na caixa de busca
-    # está contido no campo 'nome' da nossa base de dados ou se o termo digitado
-    # na nossa caixa de busca está contido no termo 'sobrenome' da nossa base de dados
-    #
-    # contatos = Contato.objects.order_by('nome').filter(
-    #     Q(nome__icontains=termo) | Q(sobrenome__icontains=termo),
-    #     mostrar=True
-    # )
-
-    # SOLUÇÃO 3
+    campos = Concat('nome', Value(' '),'sobrenome')
+    usuario_id = auth.get_user(request).id
     contatos = Contato.objects.annotate(
         nome_completo=campos
     ).filter(
-        Q(nome_completo__icontains=termo) | Q(telefone__icontains=termo)
+        Q(nome_completo__icontains=termo) & Q(do_usuario__icontains=usuario_id)
+        | Q(telefone__icontains=termo)  & Q(do_usuario__icontains=usuario_id)
     )
 
     if contatos:
@@ -108,3 +103,6 @@ def busca(request):
     return render(request, 'contatos/busca.html', {
         'contatos': contatos
     })
+
+def url_vazia(request):
+    return render(request, 'empty.html')

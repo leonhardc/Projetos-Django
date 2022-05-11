@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>{% block titulo %}{% endblock %}Agenda</title>
+    {% include 'parciais/_head.html' %}
+</head>
+<body>
+
+{% include 'parciais/_nav.html' %}
+
+{% if not user.is_authenticated %}
+<div align="center">
+    <p>
+        <br>
+        <h3>Você não estão logado. Faça login para ver seus contatos.</h3>
+        <!-- Inserir Botão Login-->
+        <br>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Login</a>
+    </p>
+</div>
+{% else %}
+<div align="center">
+    <p style="padding-left:30px">
+        <br>
+        <h3>Você está logado como {{user}}.</h3>
+        <!--Inserir botão de voltar a tela inicial-->
+        <br>
+        <a href="{% url 'index' %}" class="btn btn-primary btn-lg" role="button">Página Inicial</a>
+    </p>
+</div>
+
+{% endif %}
+
+</body>
+</html>

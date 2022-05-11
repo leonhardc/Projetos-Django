@@ -4,37 +4,37 @@
 <html lang="pt">
 
 <head>
-  <title>{% block titulo %}{% endblock %}Agenda</title>
-  {% include 'parciais/_head.html' %}
+    <title>{% block titulo %}{% endblock %}Agenda</title>
+    {% include 'parciais/_head.html' %}
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
+<!-- Navigation -->
 
-  {% include 'parciais/_nav.html' %}
+{% include 'parciais/_nav.html' %}
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
     <div class="row">
-      <div class="col-lg-12">
-          <br>
-          <p align="right">
-              <a href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button" >Cadastrar-se</a>
-              <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button" >Entrar</a>
-          </p>
-      </div>
+        <div class="col-lg-12">
+            <br>
+            <p align="right">
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg" role="button">Cadastrar-se</a>
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Entrar</a>
+            </p>
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- Inserir Imagem de Logo da Página Inicial -->
-  <img src="{% static 'img/logo.jpg'%}"
-       alt="some text"
-       style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
-  <!-- Bootstrap core JavaScript -->
-  <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- Inserir Imagem de Logo da Página Inicial -->
+<img src="{% static 'img/logo.jpg'%}"
+     alt="some text"
+     style="display: block; margin-left: auto; margin-right: auto; width: 30%;">
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 </body>
 

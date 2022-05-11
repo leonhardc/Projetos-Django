@@ -120,3 +120,8 @@ def dashboard(request):
     form_aux.save()
     messages.success(request, 'Contato salvo com sucesso.')
     return redirect('index')
+
+
+@login_required(redirect_field_name='login')
+def perfil(request):
+    pass

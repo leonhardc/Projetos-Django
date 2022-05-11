@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block conteudo%}
+
+
+
+
 <p>
     <span style="font-size:35px; padding-right:720px">Seus Contatos</span>
     <a href="{% url 'dashboard' %}"
@@ -9,50 +13,55 @@
        style="background-color:#007bff; border-color:#007bff">Novo Contato</a>
 </p>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Sobrenome</th>
-              <th>Telefone</th>
-              <th>Categoria</th>
-            </tr>
-          </thead>
-          <tbody>
 
-          {% for contato in contatos %}
-            {% if contato.mostrar %}
-              <tr>
-                <td>
-                  <a href="{% url 'ver_contato' contato.id %}"> {{ contato.nome }}</a>
-                </td>
-                <td>{{ contato.sobrenome }}</td>
-                <td>{{ contato.telefone }}</td>
-                <td>{{ contato.categoria }}</td>
-              </tr>
-            {% endif %}
-          {% endfor %}
+<table class="table"
+       style="border: 1px solid white;
+              border-collapse: collapse;
+              background-color: #DCDCDC;
+              border-radius: 10px;">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Telefone</th>
+        <th>Categoria</th>
+    </tr>
+    </thead>
+    <tbody>
 
-          </tbody>
-        </table>
+    {% for contato in contatos %}
+    {% if contato.mostrar %}
+    <tr>
+        <td>
+            <a href="{% url 'ver_contato' contato.id %}"> {{ contato.nome }}</a>
+        </td>
+        <td>{{ contato.sobrenome }}</td>
+        <td>{{ contato.telefone }}</td>
+        <td>{{ contato.categoria }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
 
-  <nav aria-label="Page navigation example">
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
     <ul class="pagination">
 
-      {% for pagina in contatos.paginator.page_range %}
+        {% for pagina in contatos.paginator.page_range %}
 
         {% if contatos.number == pagina %}
-          <li class="page-item active">
+        <li class="page-item active">
             <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{ pagina }}</a>
-          </li>
+        </li>
         {% else %}
-          <li class="page-item">
+        <li class="page-item">
             <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{ pagina }}</a>
-          </li>
+        </li>
         {% endif %}
-      {% endfor %}
+        {% endfor %}
     </ul>
-  </nav>
+</nav>
 
 
 {% endblock%}

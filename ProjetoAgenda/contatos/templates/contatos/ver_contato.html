@@ -4,34 +4,70 @@
 
 {% block conteudo%}
 
-    <h1 class="mt-5">{{ contato.nome }} {{ contato.sobrenome }}</h1>
+<h1 class="mt-5">{{ contato.nome }} {{ contato.sobrenome }}</h1>
+{% if contato.foto %}
+<p>
+    <img src="{{ contato.foto.url }}" style="max-width:250px; height: auto;">
+</p>
+{% endif %}
+<dl>
 
-    {% if contato.foto %}
-      <p>
-        <img src="{{ contato.foto.url }}" style="max-width:250px; height: auto;">
-      </p>
-    {% endif %}
-      <dl>
-        <dt>ID</dt>
-        <dd>{{ contato.id }}</dd>
+    <dt>Telefone</dt>
+    <dd>{{ contato.telefone }}</dd>
 
-        <dt>Telefone</dt>
-        <dd>{{ contato.telefone }}</dd>
+    <dt>E-mail</dt>
+    <dd>{{ contato.email }}</dd>
 
-        <dt>E-mail</dt>
-        <dd>{{ contato.email }}</dd>
+    <dt>Data criação</dt>
+    <dd>{{ contato.data_de_criacao|date:'d/m/Y' }}</dd>
 
-        <dt>Data criação</dt>
-        <dd>{{ contato.data_de_criacao|date:'d/m/Y' }}</dd>
+    <dt>Categoria</dt>
+    <dd>{{ contato.categoria }}</dd>
 
-        <dt>Categoria</dt>
-        <dd>{{ contato.categoria }}</dd>
+    <dt>Descrição</dt>
+    <dd>
+        {{ contato.descricao }}
+    </dd>
+</dl>
+<!-- Script de confirmação de exclusão de contato -->
+<script>
+    function myFunction() {
+      if (confirm("Quer realmente excluir este contato?") == true) {
+        return true
+      } else {
+        return false
+      }
+      document.getElementById("demo").innerHTML = text;
+                        }
+</script>
 
-        <dt>Descrição</dt>
-        <dd>
-          {{ contato.descricao }}
-        </dd>
-      </dl>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <br>
+            <p align="center">
+                <!-- Botão de Voltar-->
+                <a href="{% url 'index' %}"
+                   class="btn btn-primary btn-lg"
+                   role="button"
+                   style="background-color:#007bff; border-color:#007bff">Voltar</a>
+                <!-- Botão de Editar Contato-->
+                <a href=""
+                   class="btn btn-primary btn-lg"
+                   role="button"
+                   style="background-color:	#5F9EA0; border-color:#5F9EA0"
+                   >Editar Contato</a>
 
+                <!-- Botão de Excluir Contato-->
+                <a href="{% url 'excluir_contato' contato.id %}"
+                   class="btn btn-primary btn-lg"
+                   role="button"
+                   style="background-color:#FF0000; border-color:#FF0000"
+                   onclick="return myFunction()">Excluir Contato</a>
 
+            </p>
+        </div>
+    </div>
+</div>
+<br><br>
 {% endblock%}
