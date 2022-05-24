@@ -1,19 +1,17 @@
-# imports
-
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.core.validators import validate_email # validar email
 from django.contrib.auth.models import User # checar a existência de um usuário na base de dados
 from django.contrib.auth.decorators import login_required
 from .models import FormContato
-from contatos import views
 
-# views
-# auth.get_user(request)
+
 def login(request):
-    """ Função de login:
-        Se o usuario e senha estão vazios, carrega novamente login.html
-        Se o usuario e a senha estao preenchidos ele autentica o usuário e faz login."""
+    """
+    View login:
+     >> Se o usuario e senha estão vazios, carrega novamente login.html
+     >> Se o usuario e a senha estao preenchidos ele autentica o usuário e faz login.
+    """
 
     if request.method != 'POST':
         # verifica se o formulário esta vazio
@@ -34,12 +32,16 @@ def login(request):
 
 
 def logout(request):
-    # faz logout do usuário
+    """View logout"""
     auth.logout(request)
     return render(request, 'accounts/Tela_inicial.html')
 
 
 def register(request):
+    """
+    View register:
+     >> Registra cadastro de usuário no banco de dados.
+    """
     # checando o formulário está vazio.
     if request.method != 'POST':
         messages.info(request, 'NADA POSTADO.')
@@ -102,6 +104,10 @@ def register(request):
 
 @login_required(redirect_field_name='login')
 def dashboard(request):
+    """
+    View dashboard:
+     >> Cria novo contato para o usuário.
+    """
     if request.method != 'POST':
         form = FormContato()
         return render(request, 'accounts/dashboard.html', {'form': form})

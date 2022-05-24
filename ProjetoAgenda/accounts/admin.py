@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+"""  
+    Implementa área administrativa do app principal.
+"""
