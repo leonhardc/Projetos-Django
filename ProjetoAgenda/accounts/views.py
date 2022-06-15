@@ -7,16 +7,10 @@ from .models import FormContato
 
 
 def login(request):
-    """
-    View login:
-     >> Se o usuario e senha estão vazios, carrega novamente login.html
-     >> Se o usuario e a senha estao preenchidos ele autentica o usuário e faz login.
-    """
 
     if request.method != 'POST':
         # verifica se o formulário esta vazio
         return render(request, 'accounts/login.html')
-    # declarar variáveis
     usuario = request.POST.get('usuario')
     senha = request.POST.get('senha')
     # autenticar usuario
@@ -38,10 +32,7 @@ def logout(request):
 
 
 def register(request):
-    """
-    View register:
-     >> Registra cadastro de usuário no banco de dados.
-    """
+
     # checando o formulário está vazio.
     if request.method != 'POST':
         messages.info(request, 'NADA POSTADO.')
@@ -104,10 +95,6 @@ def register(request):
 
 @login_required(redirect_field_name='login')
 def dashboard(request):
-    """
-    View dashboard:
-     >> Cria novo contato para o usuário.
-    """
     if request.method != 'POST':
         form = FormContato()
         return render(request, 'accounts/dashboard.html', {'form': form})

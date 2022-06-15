@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, \
+    redirect, get_object_or_404, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.http import Http404
 from .models import Contato
+from .forms import ContatoForm
 from django.db.models import Q, Value # Q -> modulo django para fazer consultas mais complexas
 from django.db.models.functions import Concat
 from django.contrib import messages, auth
@@ -45,6 +47,28 @@ def ver_contato(request, contato_id):
 
 
 @login_required(redirect_field_name='login')
+def atualiza_contato(request, contato_id):
+    # Dicionario para dados iniciais para
+    # nomes e chaves
+    context = {}
+
+    obj = get_object_or_404(Contato, id = contato_id)
+    # passar o objeto como uma instancia de um formulario
+    form = ContatoForm(request.POST or None, instance=obj)
+
+    # salvar os dados dos formulario e redirecionar para a pagina
+    # de detalhes
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/'+str(contato_id))
+
+    # adicionar formulario ao dicionario de contexto
+    context['form'] = form
+
+    return render(request, 'contatos/update_view.html', context)
+
+
+@login_required(redirect_field_name='login')
 def excluir_contato(request, contato_id):
 
     # excluir contato
@@ -53,17 +77,6 @@ def excluir_contato(request, contato_id):
 
     return redirect('index')
 
-# outra forma de fazer a view 'ver_contato'
-#
-#
-#
-# from django.shortcuts import get_object_or_404
-# def ver_contato(request, contato_id):
-#     contato = Contato.objects.get(id=contato_id)
-#     contato = get_object_or_404(Contato, id=contato_id)
-#     return render(request, 'contatos/ver_contato.html', {
-#         'contato': contato
-#     })
 
 def busca(request):
     termo = request.GET.get('termo')
@@ -103,6 +116,7 @@ def busca(request):
     return render(request, 'contatos/busca.html', {
         'contatos': contatos
     })
+
 
 def url_vazia(request):
     return render(request, 'empty.html')
