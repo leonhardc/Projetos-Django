@@ -1,2 +1,2 @@
-__pycache__/
-
+# ignorar qualquer apasta chamada venv
+ProjetoAgenda/accounts/__pycache__/
