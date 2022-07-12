@@ -1,2 +1,6 @@
 # ignorar qualquer apasta chamada venv
 ProjetoAgenda/accounts/__pycache__/
+
+# Projeto Blog
+Projeto-Blog/virtual-env/
+Projeto-Blog/.idea/
