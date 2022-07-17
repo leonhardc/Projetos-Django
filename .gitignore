@@ -1,6 +1,8 @@
-# ignorar qualquer apasta chamada venv
+# ProjetoAgenda - Diretórios ignorados
 ProjetoAgenda/accounts/__pycache__/
 
-# Projeto Blog
+# Projeto Blog - diretórios ignorados
 Projeto-Blog/virtual-env/
 Projeto-Blog/.idea/
+Projeto-Blog/blog/__pycache__/
+Projeto-Blog/posts/migrations/Projeto-Blog/comentarios/migrations/
