@@ -19,4 +19,4 @@ class PublicacoesAdmin(admin.ModelAdmin):
         'titulo_post',
     )
 
-admi.site.register(Publicacoes, PublicacoesAdmin)
+admin.site.register(Publicacoes, PublicacoesAdmin)
