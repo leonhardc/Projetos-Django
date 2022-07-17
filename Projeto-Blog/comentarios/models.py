@@ -1,7 +1,7 @@
 from django.db import models
-from publicacoes.models import Publicacoes # para post_comentario
-from django.contrib.auth.models import User # para usuario_comentario
-from django.utils import timezone # para data_comentario
+from publicacoes.models import Publicacoes  # para post_comentario
+from django.contrib.auth.models import User  # para usuario_comentario
+from django.utils import timezone  # para data_comentario
 
 
 class Comentario(models.Model):
@@ -13,5 +13,5 @@ class Comentario(models.Model):
     data_comentario = models.DateTimeField(default=timezone.now, verbose_name='Publicado em')
     publicado_comentario = models.BooleanField(default=False, verbose_name='Publicar')
 
-    def __str__(self):
-        self.nome_comentario
+    # def __str__(self):
+    #     self.usuario_comentario
