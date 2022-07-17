@@ -1,8 +1,9 @@
 from django.contrib import admin
 from .models import Publicacoes
+from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
-class PublicacoesAdmin(admin.ModelAdmin):
+class PublicacoesAdmin(SummernoteModelAdmin):
     list_display = (
         'id',
         'titulo_post',
@@ -17,6 +18,9 @@ class PublicacoesAdmin(admin.ModelAdmin):
     list_display_links = (
         'id',
         'titulo_post',
+    )
+    summernote_fields = (
+        'conteudo_post',
     )
 
 admin.site.register(Publicacoes, PublicacoesAdmin)
