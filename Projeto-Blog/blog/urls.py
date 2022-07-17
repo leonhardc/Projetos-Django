@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('posts.urls')),
+    path('', include('post_old.urls')),
     path('admin/', admin.site.urls),
 ]
 # Add media dir and media url in urlpatterns
