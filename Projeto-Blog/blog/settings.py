@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # config dirs from static files
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
 
 # config dirs from media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -144,3 +144,6 @@ MESSAGE_TAGS = {
     constants.ERROR:'alert-error',
     constants.WARNING:'alert-warning',
 }
+
+# summer-note config
+X_FRAME_OPTIONS = 'SAMEORIGIN'
