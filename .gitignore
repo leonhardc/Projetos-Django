@@ -13,3 +13,6 @@ Projeto-Blog/posts/migrations/
 Projeto-Blog/categorias/migrations/
 Projeto-Blog/comentarios/migrations/
 Projeto-Blog/post_old/migrations/
+Projeto-Blog/super_usuario.txt
+Projeto-Blog/publicacoes/__pycache__/
+Projeto-Blog/publicacoes/migrations/
