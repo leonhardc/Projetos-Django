@@ -33,7 +33,8 @@ class PostBusca(PostIndex):
     pass
 
 class PostCategoria(PostIndex):
-    pass
+    template_name = 'publicacoes/post_categoria.html'
+
 
 class PostDetalhes(UpdateView):
     pass
