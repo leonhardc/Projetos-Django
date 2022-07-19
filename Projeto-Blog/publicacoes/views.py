@@ -7,8 +7,14 @@ from publicacoes.models import Publicacoes # para PostIndex()
 class PostIndex(ListView):
     model = Publicacoes
     template_name = 'publicacoes/index.html'
-    paginate_by = 3
+    paginate_by = 6
     context_object_name = 'publicacoes' # obejto iteravel que setá usado em index.html
+
+    def get_queryset(self): # sobrescrever método para mudar a ordem de exibição das
+                            # publicoes na página
+        qs = super().get_queryset()
+        qs = qs.order_by('-id')
+        return qs
 
 class PostBusca(PostIndex):
     pass
