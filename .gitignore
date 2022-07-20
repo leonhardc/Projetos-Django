@@ -1,18 +1,29 @@
 # ProjetoAgenda - Diretórios ignorados
 ProjetoAgenda/accounts/__pycache__/
 
+
+### ------------------------------------------------------------ ###
+### ------------------------------------------------------------ ###
 # Projeto Blog - diretórios ignorados
+
 Projeto-Blog/categorias/__pycache__/
-Projeto-Blog/comentarios/__pycache__/
-Projeto-Blog/post_old/__pycache__/
-Projeto-Blog/posts/__pycache__/
-Projeto-Blog/virtual-env/
-Projeto-Blog/.idea/
-Projeto-Blog/blog/__pycache__/
-Projeto-Blog/posts/migrations/
 Projeto-Blog/categorias/migrations/
+
+Projeto-Blog/comentarios/__pycache__/
 Projeto-Blog/comentarios/migrations/
-Projeto-Blog/post_old/migrations/
-Projeto-Blog/super_usuario.txt
+
 Projeto-Blog/publicacoes/__pycache__/
 Projeto-Blog/publicacoes/migrations/
+
+Projeto-Blog/.idea/
+Projeto-Blog/blog/__pycache__/
+
+
+Projeto-Blog/virtual-env/
+
+
+
+# Projeto Blog - arquivos ignorados
+Projeto-Blog/super_usuario.txt
+
+### ------------------------------------------------------------ ###
