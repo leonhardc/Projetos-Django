@@ -62,13 +62,14 @@
             <h2 class="my-3">Deixe um comentário</h2>
 
             <form method="POST" action="#envia_comentario">
-
+                {% csrf_token %}
                 <table class="table">
 
                     {{ form }}
 
                     <tr>
                         <td colspan="2">
+                            {% include 'parciais/_messages.html' %}
                             <input id="envia_comentario" type="submit" class="btn btn-primary"
                                 value="Enviar">
                         </td>
