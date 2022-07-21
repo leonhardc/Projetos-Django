@@ -9,7 +9,7 @@ class Comentario(models.Model):
     email_comentario = models.EmailField(verbose_name='Email')
     comentario = models.TextField(verbose_name='Comentario')
     post_comentario = models.ForeignKey(Publicacoes, on_delete=models.CASCADE, verbose_name='Post ID')
-    usuario_comentario = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Autor ID')
+    usuario_comentario = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Autor ID', blank=True, null=True)
     data_comentario = models.DateTimeField(default=timezone.now, verbose_name='Publicado em')
     publicado_comentario = models.BooleanField(default=False, verbose_name='Publicar')
 
