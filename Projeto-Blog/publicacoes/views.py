@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from publicacoes.models import Publicacoes # para PostIndex()
 from django.db.models import Q, Count, Case, When # para ejetar numero de comentarios em
                                                   # PostIndex >> get_queryset()
 from comentarios.forms import FormComentario # para a view PostDetalhes()
-
+from comentarios.models import Comentario # para Post_detalhes()
+from django.contrib import messages # para Post_detalhes()
 
 # Create your views here.
 class PostIndex(ListView):
@@ -72,4 +73,20 @@ class PostDetalhes(UpdateView):
     form_class = FormComentario
     template_name = 'publicacoes/post_detalhes.html'
     context_object_name = 'publicacao'
+
+    # validando formulario
+    def form_valid(self, form):
+        post = self.get_object()
+        comentario = Comentario(**form.cleaned_data)
+        comentario.post_comentario = post
+
+        if self.request.user.is_authenticated: # verificando se o usuario está autenticado
+            comentario.usuario_comentario = self.request.user
+
+        comentario.save()
+        messages.success(self.request, 'Comentário enviado com sucesso.')
+        return redirect( # redirecionar a pagina
+            'post_detalhes',
+            pk = post.id
+        )
 
