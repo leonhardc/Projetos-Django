@@ -74,6 +74,20 @@ class PostDetalhes(UpdateView):
     template_name = 'publicacoes/post_detalhes.html'
     context_object_name = 'publicacao'
 
+    # injetando comentários no template post_detalhes.html
+    def get_context_data(self, **kwargs):
+        contexto = super(PostDetalhes, self).get_context_data(**kwargs)
+        post = self.get_object() # obter publicação/post atual
+        comentarios = Comentario.objects.filter(
+            publicado_comentario=True,
+            post_comentario=post.id
+        )
+        contexto['comentarios'] = comentarios # injeção dos comentários
+
+
+        return contexto
+
+
     # validando formulario
     def form_valid(self, form):
         post = self.get_object()
