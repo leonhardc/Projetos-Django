@@ -4,6 +4,8 @@ from django.views.generic.edit import UpdateView
 from publicacoes.models import Publicacoes # para PostIndex()
 from django.db.models import Q, Count, Case, When # para ejetar numero de comentarios em
                                                   # PostIndex >> get_queryset()
+from comentarios.forms import FormComentario # para a view PostDetalhes()
+
 
 # Create your views here.
 class PostIndex(ListView):
@@ -66,4 +68,8 @@ class PostCategoria(PostIndex):
 
 
 class PostDetalhes(UpdateView):
-    pass
+    model = Publicacoes
+    form_class = FormComentario
+    template_name = 'publicacoes/post_detalhes.html'
+    context_object_name = 'publicacao'
+
