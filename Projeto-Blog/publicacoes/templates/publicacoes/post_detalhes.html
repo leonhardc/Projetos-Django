@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load humanize %}
 
+{% block titulo %} {{ publicacao.titulo_post|title }} | {% endblock %}
+
 {% block conteudo %}
 
 <!-- POST -->
