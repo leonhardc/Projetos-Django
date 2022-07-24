@@ -18,6 +18,7 @@ Projeto-Blog/publicacoes/migrations/
 Projeto-Blog/.idea/
 Projeto-Blog/blog/__pycache__/
 
+Projeto-Blog/publicacoes/templatetags/__pycache__/
 
 Projeto-Blog/virtual-env/
 Projeto-Blog/db.sqlite3
