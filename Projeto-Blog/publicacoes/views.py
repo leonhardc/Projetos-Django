@@ -18,6 +18,7 @@ class PostIndex(ListView):
     def get_queryset(self): # sobrescrever método para mudar a ordem de exibição das
                             # publicoes na página
         qs = super().get_queryset()
+        qs = qs.select_related('categoria_post')
         qs = qs.order_by('-id').filter(publicado_post=True)
         # ejetar na consulta o numero de comentarios publicados
         qs = qs.annotate(
